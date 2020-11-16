@@ -6,27 +6,27 @@ function getPlot(id) {
         console.log(data)
 
         var wfreq = data.metadata.map(d => d.wfreq)
-        console.log('Washing Freq: ${wfreq}')
+        //console.log('Washing Freq: ${wfreq}')
 
         //filter sample values by id
         var samples = data.samples.filter(s => s.id.toString() === id)[0];
-        console.log(samples)
+        //console.log(samples)
 
         //getting the top ten
         var samplevalues = samples.sample_values.slice(0, 10).reverse();
-        console.log(samplevalues)
+        //console.log(samplevalues)
 
         //getting only top 10 otu ids for the plot OTU and then reversing it.
         var OTU_top = (samples.otu_ids.slice(0, 10)).reverse();
-        console.log(OTU_top)
+        //console.log(OTU_top)
 
         //getting the otu id's to the desired form for the plot
         var OTU_id = OTU_top.map(d => "OTU " + d)
-        console.log('OTU IDS: ${OTU_id}')
+        //console.log('OTU IDS: ${OTU_id}')
 
         //getting the top 10 labels for the plot
         var labels = samples.otu_labels.slice(0, 10);
-        console.log('Sample Values: ${samplevalues}')
+        //console.log('Sample Values: ${samplevalues}')
 
         var trace = {
             x: samplevalues,
@@ -98,15 +98,26 @@ function getPlot(id) {
                 gauge: {
                     axis: { range: [null, 9] },
                     steps: [
-                        { range: [0, 2], color: "yellow" },
-                        { range: [2, 4], color: "red" },
-                        { range: [4, 6], color: "green" },
-                        { range: [6, 8], color: "blue" },
-                        { range: [8, 9], color: "purple" },
-                    ]
-                }
+                        { range: [0, 1], color: "yellow" },
+                        { range: [1, 2], color: "red" },
+                        { range: [2, 3], color: "brown" },
+                        { range: [3, 4], color: "blue" },
+                        { range: [4, 5], color: "purple" },
+                        { range: [5, 6], color: "teal" },
+                        { range: [6, 7], color: "grey" },
+                        { range: [7, 8], color: "pink" },
+                        { range: [8, 9], color: "maroon" },
 
-            }
+
+                    ],
+                    threshold: {
+                        line: { color: "red", width: 4 },
+                        thickness: 0.75,
+                        value: 10,
+                    },
+                },
+
+            },
         ];
         var layout_g = {
             width: 700,
@@ -120,11 +131,11 @@ function getPlot(id) {
 //create the function to get the necessary data
 function getInfo(id) {
     //read the json file to get data
-    d3.json("/data/samples.json").then((data) => {
+    d3.json("data/samples.json").then((data) => {
 
         // get the metadata info for the demographic panel
         var metadata = data.metadata;
-        console.log(metadata)
+        //console.log(metadata)
 
         // filter meta data info by id
         var result = metadata.filter(meta => meta.id.toString() === id)[0];
