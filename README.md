@@ -32,7 +32,7 @@ This dataset reveals that a small handful of microbial species (also called oper
 
 * Used `otu_labels` for the text values.
 
-![Bubble Chart](Images/bubble chart.png)
+![bubble chart](https://user-images.githubusercontent.com/66078772/99419587-e32b5880-28c1-11eb-9719-2d6bcb9131d7.png)
 
 4. Displayed the sample metadata, i.e., an individual's demographic information.
 
