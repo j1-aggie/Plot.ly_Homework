@@ -2,11 +2,11 @@
 
 function getPlot(id) {
     // pull data from the json file
-    d3.json('/data/samples.json').then((data) => {
+    d3.json('data/samples.json').then((data) => {
         console.log(data)
 
-        var wfreq = data.metadata.map(d => d.wfreq)
-        console.log('Washing Freq: ${wfreq}')
+        //var wfreq = data.metadata.map(d => d.wfreq)
+        //console.log('Washing Freq: ${wfreq}')
 
         //filter sample values by id
         var samples = data.samples.filter(s => s.id.toString() === id)[0];
@@ -85,90 +85,7 @@ function getPlot(id) {
         // creating the bubble plot
         Plotly.newPlot("bubble", data1, layout_b);
 
-        // guage chart
-        function buildGauge(wfreq) {
-            let level = parseFloat(wfreq) * 20;
 
-            let degrees = 180 - level;
-            let radius = 0.5;
-            let radians = (degrees * Math.Pi) / 180;
-            let x = radius * Math.cos(radians);
-            let y = radians * Math.sin(radians);
-            let mainPath = "M-.0 -0.05 L .0 0.05 L";
-            let pathX = String(x);
-            let space = " ";
-            let pathY = String(y);
-            let pathEnd = " Z";
-            let path = mainPath.concat(pathX, space, pathY, pathEnd);
-            console.log(path);
-
-        }
-        var data_g = [
-            {
-                type: "scatter",
-                x: [0],
-                y: [0],
-                marker: { size: 12, color: "850000" },
-                showlegend: false,
-                text: level,
-                hoverinfo: "text+name"
-            },
-            {
-                values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
-                rotation: 90,
-                text: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1", ""],
-                textinfo: "text",
-                textposition: "inside",
-                marker: {
-                    colors: [
-                        "rgba(0,105,11,.5)",
-                        "rgba(10,120,22,.5)",
-                        "rgba(14,127,0,.5)",
-                        "rgba(110,154,22,.5)",
-                        "rgba(170,202,42,.5)",
-                        "rgba(202,209,95,.5)",
-                        "rgba(210,206,145,.5)",
-                        "rgba(232,226,202,.5)",
-                        "rgba(240, 230,215,.5)",
-                        "rgba(255,255,255,0)"
-                    ]
-                },
-                labels: ["8-9", "7-8", "6-7", "5-6", "4-5", "3-4", "2-3", "1-2", "0-1", ""],
-                hoverinfo: "label",
-                hole: 0.5,
-                type: "pie",
-                showlegend: false
-            }
-        ];
-        var layout_g = {
-            shapes: [
-                {
-                    type: "path",
-                    path: path,
-                    fillcolor: "850000",
-                    line: {
-                        color: "850000"
-                    }
-                }
-            ],
-            title: "Belly Button Washing Frequency <br> Scrubs per Week",
-            width: 500,
-            height: 500,
-            xaxis: {
-                zeroline: false,
-                showticklabels: false,
-                showgrid: false,
-                range: [-1, 1]
-            },
-            yaxis: {
-                zeroline: false,
-                showticklabels: false,
-                showgrid: false,
-                range: [-1, 1]
-            }
-        }
-        let GAUGE = document.getElementById("gauge");
-        Plotly.newPlot(GAUGE, data_g, layout_g);
     });
 }
 
@@ -193,6 +110,50 @@ function getInfo(id) {
         // grab the necessary demographic data
         Object.entries(result).forEach((key) => {
             demographicInfo.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");
+
+            // guage chart
+            var wfreqDefault = result.wfreq;
+            var data_g = [
+                {
+                    domain: { x: [0, 1], y: [0, 1] },
+                    value: wfreqDefault,
+                    title: { text: 'Weekly Washing Frequency' },
+                    delta: { reference: 9, increasing: { color: "red" } },
+                    type: "indicator",
+                    hoverinfo: "wfreq",
+
+                    mode: "gauge+delta+number",
+                    gauge: {
+                        axis: { range: [null, 9] },
+                        steps: [
+                            { range: [0, 1], color: "yellow" },
+                            { range: [1, 2], color: "red" },
+                            { range: [2, 3], color: "brown" },
+                            { range: [3, 4], color: "blue" },
+                            { range: [4, 5], color: "purple" },
+                            { range: [5, 6], color: "teal" },
+                            { range: [6, 7], color: "grey" },
+                            { range: [7, 8], color: "pink" },
+                            { range: [8, 9], color: "maroon" },
+
+
+                        ],
+                        threshold: {
+                            line: { color: "red", width: 7 },
+                            thickness: 2,
+                            value: 10,
+                        },
+                    },
+
+                },
+            ];
+            var layout_g = {
+                width: 700,
+                height: 600,
+                margin: { t: 20, b: 40, 1: 100, r: 100 }
+            };
+            Plotly.newPlot("gauge", data_g, layout_g);
+
         });
     });
 }
