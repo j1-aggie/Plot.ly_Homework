@@ -120,8 +120,6 @@ function getInfo(id) {
                     title: { text: 'Weekly Washing Frequency' },
                     delta: { reference: 9, increasing: { color: "red" } },
                     type: "indicator",
-                    hoverinfo: "wfreq",
-
                     mode: "gauge+delta+number",
                     gauge: {
                         axis: { range: [null, 9] },
@@ -151,6 +149,7 @@ function getInfo(id) {
                 width: 700,
                 height: 600,
                 margin: { t: 20, b: 40, 1: 100, r: 100 }
+
             };
             Plotly.newPlot("gauge", data_g, layout_g);
 
