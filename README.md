@@ -53,7 +53,7 @@ The following task is advanced and therefore optional.  I chose to do the advanc
 
 * The code was modified from the example gauge code to account for values ranging from 0 through 9.
 
-* The gauge chart updates everytime whenever a new sample is selected.
+* The gauge chart updates whenever a new sample is selected.
 
 ![Gauge chart](https://user-images.githubusercontent.com/66078772/99420509-e541e700-28c2-11eb-96fd-eb14f729697b.png)
 
