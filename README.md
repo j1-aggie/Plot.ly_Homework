@@ -38,7 +38,8 @@ This dataset reveals that a small handful of microbial species (also called oper
 
 5. Displayed each key-value pair from the metadata JSON object somewhere on the page.
 
-![hw](Images/hw03.png)
+![demographics](https://user-images.githubusercontent.com/66078772/99420386-c2afce00-28c2-11eb-906a-7a6ed5440ad3.PNG)
+
 
 6. Update all of the plots any time that a new sample is selected.
 
