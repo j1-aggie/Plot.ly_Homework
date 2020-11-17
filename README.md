@@ -55,7 +55,7 @@ The following task is advanced and therefore optional.  I chose to do the advanc
 
 * The gauge chart updates everytime whenever a new sample is selected.
 
-![Weekly Washing Frequency Gauge](Images/Gauge chart.png)
+![Gauge chart](https://user-images.githubusercontent.com/66078772/99420509-e541e700-28c2-11eb-96fd-eb14f729697b.png)
 
 ## Deployment
 
