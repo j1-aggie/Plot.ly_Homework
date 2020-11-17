@@ -18,7 +18,7 @@ This dataset reveals that a small handful of microbial species (also called oper
 
 * Used `otu_labels` as the hovertext for the chart.
 
-  ![bar Chart](Images/Bar chart.png)
+  ![Bar chart](https://user-images.githubusercontent.com/66078772/99419448-c0993f80-28c1-11eb-8de1-07e67010b2e1.png)
 
 3. Created a bubble chart that displays each sample.
 
